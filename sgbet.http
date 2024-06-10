@@ -1,0 +1,6 @@
+@sgbet_HostAddress = http://localhost:5140
+
+GET {{sgbet_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
