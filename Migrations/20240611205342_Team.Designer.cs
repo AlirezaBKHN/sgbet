@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using sgbet.Db;
@@ -11,9 +12,11 @@ using sgbet.Db;
 namespace sgbet.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240611205342_Team")]
+    partial class Team
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,41 +157,6 @@ namespace sgbet.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("sgbet.Models.Match", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AwayId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("DateAndTime")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("HostId")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsEnded")
-                        .HasColumnType("boolean");
-
-                    b.Property<int?>("ResultAway")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("ResultHome")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AwayId");
-
-                    b.HasIndex("HostId");
-
-                    b.ToTable("Matches");
-                });
-
             modelBuilder.Entity("sgbet.Models.Team", b =>
                 {
                     b.Property<int>("Id")
@@ -319,25 +287,6 @@ namespace sgbet.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("sgbet.Models.Match", b =>
-                {
-                    b.HasOne("sgbet.Models.Team", "Away")
-                        .WithMany()
-                        .HasForeignKey("AwayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("sgbet.Models.Team", "Host")
-                        .WithMany()
-                        .HasForeignKey("HostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Away");
-
-                    b.Navigation("Host");
                 });
 #pragma warning restore 612, 618
         }

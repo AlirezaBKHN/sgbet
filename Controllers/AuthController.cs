@@ -3,7 +3,7 @@ using sgbet.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuthenticationApi.Controllers;
+namespace sgbet.Controllers;
 
 [ApiController]
 [Route("[controller]")]
